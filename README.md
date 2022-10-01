@@ -13,7 +13,7 @@ ITMO Blockchain HW 1
 2) https://github.com/OpenZeppelin/openzeppelin-contracts/blob/f2112be4d8e2b8798f789b948f2a7625b2350fe7/contracts/token/ERC20/ERC20.sol - сделать, чтобы токен не мог бы быть transferred по субботам
 
 ```
-- 210 require(sender != address(0), "ERC20: transfer from the zero address");
+- 210 require(recipient != address(0), "ERC20: transfer to the zero address");
 
 + 210 require(recipient != address(0), "ERC20: transfer to the zero address");
 + 211 require(((block.timestamp / 86400) + 4) % 7 != 6);
