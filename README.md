@@ -6,7 +6,7 @@ ITMO Blockchain HW 1
 ```
 - 193 transactionId = addTransaction(destination, value, data);
 
-+ 193 require(value <= 66 ether);
++ 193 require(value <= 66 ether, "Only <= 66 ether can be in transaction");
 + 194 transactionId = addTransaction(destination, value, data);
 ```
 
@@ -16,7 +16,10 @@ ITMO Blockchain HW 1
 - 210 require(recipient != address(0), "ERC20: transfer to the zero address");
 
 + 210 require(recipient != address(0), "ERC20: transfer to the zero address");
-+ 211 require(((block.timestamp / 86400) + 4) % 7 != 6);
++ 211 require(_weekday() != 6, "Saturday transfers are not allowed");
++ 299 function _weekday() internal pure returns (bool) {
++ 300     return ((block.timestamp / 86400 + 4) % 7);
++ 301 }
 ```
 
 3) https://github.com/mixbytes/solidity/blob/076551041c420b355ebab40c24442ccc7be7a14a/contracts/token/DividendToken.sol - сделать чтобы платеж в ETH принимался только специальной функцией, принимающей помимо ETH еще комментарий к платежу (bytes[32]). Простая отправка ETH в контракт запрещена
